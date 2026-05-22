@@ -1,0 +1,44 @@
+appId: com.youssefevanw.researchhub
+productName: Research Hub
+copyright: Copyright © 2026 youssefevanw
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - package.json
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+
+asar: true
+
+mac:
+  category: public.app-category.productivity
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  icon: build/icon.png
+  target:
+    - target: dmg
+      arch:
+        - universal
+  artifactName: "${productName}-${version}-${arch}.${ext}"
+
+dmg:
+  sign: false
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  artifactName: "${productName}-Setup-${version}.${ext}"
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: false
